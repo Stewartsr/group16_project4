@@ -56,7 +56,7 @@ public class Main {
     }
 
     //This controller
-    private static String placeShip(Request req) {
+    public static String placeShip(Request req) {
         BattleshipModel currModel = getModelFromReq(req);
         String id = req.params("id");
         String row = req.params("row");
@@ -69,12 +69,8 @@ public class Main {
 
     private static String setMode(Request req){
         BattleshipModel currModel = getModelFromReq(req);
-        String mode = req.params("type");
-        if(mode.contains("hard")){
-            currModel.setEzmode(1);
-        }else{
-            currModel.setEzmode(0);
-        }
+        String type = req.params("type");
+        currModel = currModel.setEzmode(type, currModel);
         Gson gson = new Gson();
         return gson.toJson(currModel);
     }

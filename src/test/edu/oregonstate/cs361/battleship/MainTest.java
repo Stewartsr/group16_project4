@@ -7,16 +7,15 @@ import org.junit.jupiter.api.Test;
 import spark.Spark;
 import spark.utils.IOUtils;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static spark.Spark.awaitInitialization;
-import static spark.Spark.get;
 
 
 /**
@@ -49,13 +48,10 @@ class MainTest {
     }
     @Test
     public void testnewModel() {
+        BattleshipModel model = new BattleshipModel();
+        Gson gson = new Gson();
         String res1 = Main.newModel();
-        assertEquals(200, res1);
-    }
-    @Test
-    public void testnewModel1() {
-        String res1 = Main.newModel();
-        assertEquals(200, res1);
+        assertEquals(gson.toJson(model), res1);
     }
 
     private TestResponse request(String method, String path) {
